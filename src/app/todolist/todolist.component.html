@@ -1,0 +1,45 @@
+<div class="container">
+    <form (ngSubmit)="Add(taskForm)" #taskForm="ngForm">
+        <div class="mb-3">
+          <label for="Title" class="form-label"> title</label>
+          <input required type="text" [(ngModel)]="Title" class="form-control" id="Title" ngModel name="Title">
+        </div>
+        <div class="mb-3">
+          <label for="Describtion" class="form-label"> Describtion</label>
+          <input type="text" [(ngModel)]="Describtion" class="form-control" id="Describtion" ngModel name="Describtion">
+        </div>
+        <div class="mb-3">
+            <label for="Date" class="form-label"> Date</label>
+            <input type="date" [(ngModel)]="Date" class="form-control" id="Date" ngModel name="Date">
+        </div>
+        <button type="submit" 
+        [disabled]="taskForm.invalid"
+        *ngIf="showButton()" class="btn btn-primary">ADD</button>
+        <button type="button" *ngIf="!showButton()" class="btn btn-primary" (click)="Update()">Modify</button>
+      </form>
+
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Describtion</th>
+            <th scope="col">Date</th>
+            <th scope="col">Complete</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of Array; index as rowIndex">
+            <td>{{t.Title}}</td>
+            <td>{{t.Describtion}}</td>
+            <td>{{t.Date}}</td>
+            <td><input type="checkbox" id="checkbox"></td>
+            <td><button class="btn btn-primary"(click)="Edit(rowIndex,taskForm)">Edit</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="Delete(rowIndex)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
